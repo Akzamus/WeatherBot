@@ -1,0 +1,5 @@
+server.port=
+telegrambot.userName=
+telegrambot.botToken=
+telegrambot.webHookPath=
+openweathermap.key=
