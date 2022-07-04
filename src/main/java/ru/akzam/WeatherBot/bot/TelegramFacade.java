@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot;
+package ru.akzam.WeatherBot.bot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

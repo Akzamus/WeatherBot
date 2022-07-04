@@ -29,7 +29,15 @@ public class UsersService {
     }
 
     @Transactional
-    public void addLocationFromUser(String location, long id) {
-        userRepository.findById(id).get().setLocation(location);
+    public void addLocationFromUser(String location, long id, double latitude, double longitude) {
+        User user = userRepository.findById(id).get();
+        user.setLocation(location);
+        user.setLatitude(latitude);
+        user.setLongitude(longitude);
+    }
+
+    @Transactional
+    public void deleteLocationFromUser(long userId) {
+        findById(userId).get().setLocation(null);
     }
 }

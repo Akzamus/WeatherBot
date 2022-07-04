@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot.botconfig;
+package ru.akzam.WeatherBot.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

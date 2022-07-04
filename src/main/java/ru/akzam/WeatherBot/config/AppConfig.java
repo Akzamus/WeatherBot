@@ -3,9 +3,8 @@ package ru.akzam.WeatherBot.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
-import ru.akzam.WeatherBot.model.TelegramBot;
-import ru.akzam.WeatherBot.botconfig.TelegramBotConfig;
-import ru.akzam.WeatherBot.TelegramFacade;
+import ru.akzam.WeatherBot.bot.TelegramBot;
+import ru.akzam.WeatherBot.bot.TelegramFacade;
 
 @Configuration
 public class AppConfig {

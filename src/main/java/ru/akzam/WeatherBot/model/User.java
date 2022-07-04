@@ -25,7 +25,23 @@ public class User {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "latitude")
+    private double latitude;
+
+    @Column(name = "longitude")
+    private double longitude;
+
     public User(long id) {
         this.id = id;
+    }
+
+    public void setLocation(String location) {
+        if(location == null)
+            this.location = null;
+        else if(location.equalsIgnoreCase("USA"))
+            this.location = location.toUpperCase();
+        else
+            this.location = location.substring(0,1).toUpperCase() +
+                            location.substring(1).toLowerCase();
     }
 }

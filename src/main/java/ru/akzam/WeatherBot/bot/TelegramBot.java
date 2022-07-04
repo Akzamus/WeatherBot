@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot.model;
+package ru.akzam.WeatherBot.bot;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,6 @@ import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.updates.SetWebhook;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.starter.SpringWebhookBot;
-import ru.akzam.WeatherBot.TelegramFacade;
 
 @Getter
 @Setter

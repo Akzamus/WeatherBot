@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.akzam.WeatherBot.model.TelegramBot;
+import ru.akzam.WeatherBot.bot.TelegramBot;
 
 @RestController
 public class WebhookController {

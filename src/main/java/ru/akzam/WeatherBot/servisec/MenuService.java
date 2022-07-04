@@ -34,7 +34,7 @@ public class MenuService {
         rowOne.add(new KeyboardButton("week"));
 
         rowTwo.add((new KeyboardButton("now")));
-        rowTwo.add(new KeyboardButton("back"));
+        rowTwo.add(new KeyboardButton("reset"));
 
         keyboard.add(rowOne);
         keyboard.add(rowTwo);
