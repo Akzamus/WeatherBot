@@ -67,7 +67,7 @@ public class MessageHandler {
     private void addLocation(String messageText, SendMessage sendMessage, long userId) {
         if(messageText.contains("/start")) {
             sendMessage.setText(Replica.GREETING + "\n" + Replica.ADVICE);
-        }else if(weatherService.isExist(messageText)){
+        }else if(geocoderService.isExist(messageText)){
             Double[] coordinates;
             try {coordinates = geocoderService.getCoordinates(messageText);
             }catch (IOException e) {sendMessage.setText(Replica.GEOCODING_ERROR); return;}

@@ -80,16 +80,4 @@ public class WeatherService {
         }
         return dayForecasts;
     }
-
-    public boolean isExist(String location) {
-        location = location.toUpperCase();
-        if(location.equals("WEEK") || location.equals("DAY") || location.equals("RESET") || location.equals("BACK"))
-            return false;
-        try {
-            urlUtil.getUrlContent(urlUtil.getUrlToNowForecast(location));
-            return true;
-        }catch (IOException e){
-            return false;
-        }
-    }
 }

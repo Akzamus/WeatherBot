@@ -36,12 +36,16 @@ public class User {
     }
 
     public void setLocation(String location) {
-        if(location == null)
+        if(location == null){
             this.location = null;
-        else if(location.equalsIgnoreCase("USA"))
+        } else if (location.length() == 3) {
             this.location = location.toUpperCase();
-        else
-            this.location = location.substring(0,1).toUpperCase() +
-                            location.substring(1).toLowerCase();
+        } else {
+            String[] words = location.split(" ");
+            String correctLocationFormat = "";
+            for (String word : words)
+                correctLocationFormat += word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase() + " ";
+            this.location = correctLocationFormat.substring(0,correctLocationFormat.length()-1);
+        }
     }
 }
