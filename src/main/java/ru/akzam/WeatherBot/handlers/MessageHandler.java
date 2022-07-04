@@ -92,11 +92,11 @@ public class MessageHandler {
                 List<DayForecast> dayForecasts = weatherService.getWeekForecast(user.getLatitude(), user.getLongitude());
                 StringBuilder content = new StringBuilder("Weather for the week in " + user.getLocation() + "\n\n");
                 for (DayForecast dayForecast : dayForecasts)
-                    content.append(dayForecast.getInfo()).append("\n");
+                    content.append(dayForecast.getInfo()).append("\n\n");
                 sendMessage.setText(content.toString());
             }
             case "now" -> {
-                sendMessage.setText("Weather in Almaty now:\n" +
+                sendMessage.setText("Weather in " + user.getLocation()+ " now:\n" +
                         weatherService.getNowForecast(user.getLocation()).getInfo());
             }
             case "reset" -> {

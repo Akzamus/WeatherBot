@@ -50,10 +50,12 @@ public class WeatherService {
 
         for (int i = 1; i < 25; i++) {
             JSONObject hour = hourlyArray.getJSONObject(i);
+            JSONObject weather = hour.getJSONArray("weather").getJSONObject(0);
             hourForecasts.add(new HourForecast(
                new Date(hour.getLong("dt") * 1000),
                (int)Math.round(hour.getDouble("temp")),
-               Emoji.getEmojiByIcon(hour.getJSONArray("weather").getJSONObject(0).getString("icon"))
+               Emoji.getEmojiByIcon(weather.getString("icon")),
+               weather.getString("description")
             ));
         }
         return hourForecasts;
@@ -81,7 +83,7 @@ public class WeatherService {
 
     public boolean isExist(String location) {
         location = location.toUpperCase();
-        if(location.equals("WEEK") || location.equals("DAY") || location.equals("BACK"))
+        if(location.equals("WEEK") || location.equals("DAY") || location.equals("RESET") || location.equals("BACK"))
             return false;
         try {
             urlUtil.getUrlContent(urlUtil.getUrlToNowForecast(location));

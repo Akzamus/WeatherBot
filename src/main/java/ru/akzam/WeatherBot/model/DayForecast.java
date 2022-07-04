@@ -46,9 +46,9 @@ public class DayForecast {
 
     public String getInfo() {
         return simpleDateFormat.format(date) + " " + weatherEmoji + "\n" +
-               "Morning  " + morningTemperature + "°C\n" +
-               "Day          " + dayTemperature     + "°C\n" +
-               "Evening   " + eveningTemperature + "°C\n" +
-               "Night       " + nightTemperature   + "°C\n";
+               "Morning          " + morningTemperature + "°C\n" +
+               "Day                  " + dayTemperature     + "°C\n" +
+               "Evening           " + eveningTemperature + "°C\n" +
+               "Night               " + nightTemperature   + "°C\n";
     }
 }

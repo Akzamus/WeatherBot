@@ -27,9 +27,13 @@ public class HourForecast {
     @NotEmpty
     private String weatherEmoji;
 
+    @NotEmpty
+    private String description;
+
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:00", Locale.ENGLISH);
 
     public String getInfo() {
-        return simpleDateFormat.format(date) + ":     " + temperature + "°C   " + weatherEmoji;
+        return simpleDateFormat.format(date) + ":\nTemperature: " + temperature + "°C\n" +
+               description.substring(0, 1).toUpperCase() + description.substring(1) + " " + weatherEmoji + "\n";
     }
 }
