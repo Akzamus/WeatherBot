@@ -10,7 +10,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 @Getter
 @Setter
@@ -30,7 +29,8 @@ public class HourForecast {
     @NotEmpty
     private String description;
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:00", Locale.ENGLISH);
+    @NotNull
+    private SimpleDateFormat simpleDateFormat;
 
     public String getInfo() {
         return simpleDateFormat.format(date) + ":\nTemperature: " + temperature + "°C\n" +

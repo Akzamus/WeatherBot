@@ -15,7 +15,7 @@ import ru.akzam.WeatherBot.servisec.WeatherService;
 import ru.akzam.WeatherBot.util.Replica;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class MessageHandler {
@@ -43,7 +43,7 @@ public class MessageHandler {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(String.valueOf(chatId));
 
-        if(!usersService.findById(userId).isPresent())
+        if(usersService.findById(userId).isEmpty())
             usersService.save(new User(userId));
 
         User user = usersService.findById(userId).get();
@@ -67,45 +67,39 @@ public class MessageHandler {
     private void addLocation(String messageText, SendMessage sendMessage, long userId) {
         if(messageText.contains("/start")) {
             sendMessage.setText(Replica.GREETING + "\n" + Replica.ADVICE);
-        }else if(geocoderService.isExist(messageText)){
-            Double[] coordinates;
-            try {coordinates = geocoderService.getCoordinates(messageText);
-            }catch (IOException e) {sendMessage.setText(Replica.GEOCODING_ERROR); return;}
-            usersService.addLocationFromUser(messageText, userId, coordinates[0], coordinates[1]);
-            sendMessage.setText(Replica.CORRECT_LOCATION);
-            menuService.addMainMenu(sendMessage);
-        }else {
-            sendMessage.setText(Replica.INCORRECT_LOCATION);
+        }else{
+            try {
+                weatherService.getNowForecast(messageText);
+                Double[] coordinates = geocoderService.getCoordinates(messageText);
+                usersService.addLocationFromUser(messageText, userId, coordinates[0], coordinates[1]);
+                sendMessage.setText(Replica.CORRECT_LOCATION);
+                menuService.addMainMenu(sendMessage);
+            }catch (IOException e) {sendMessage.setText(Replica.INCORRECT_LOCATION);}
         }
     }
 
     private SendMessage getResponseToRequestFromKeyboard(String request, SendMessage sendMessage, User user) throws IOException {
         switch (request) {
-            case "day" -> {
-                List<HourForecast> hourForecasts = weatherService.getDayForecast(user.getLatitude(), user.getLongitude());
-                StringBuilder content = new StringBuilder("Weather for the day in " + user.getLocation() + "\n\n");
-                for (HourForecast hourForecast : hourForecasts)
-                    content.append(hourForecast.getInfo()).append("\n");
-                sendMessage.setText(content.toString());
-            }
-            case "week" -> {
-                List<DayForecast> dayForecasts = weatherService.getWeekForecast(user.getLatitude(), user.getLongitude());
-                StringBuilder content = new StringBuilder("Weather for the week in " + user.getLocation() + "\n\n");
-                for (DayForecast dayForecast : dayForecasts)
-                    content.append(dayForecast.getInfo()).append("\n\n");
-                sendMessage.setText(content.toString());
-            }
-            case "now" -> {
-                sendMessage.setText("Weather in " + user.getLocation()+ " now:\n" +
-                        weatherService.getNowForecast(user.getLocation()).getInfo());
-            }
-            case "reset" -> {
-                usersService.deleteLocationFromUser(user.getId());
-                sendMessage.setText(Replica.LOCATION_DROPPED +"\n" + Replica.ADVICE);
-            }
-            default -> {
-                sendMessage.setText(Replica.USE_KEYBOARD);
-            }
+            case "day"  -> sendMessage.setText("Weather for the day in " + user.getLocation() + "\n\n" +
+                                                weatherService.getDayForecast(user.getLatitude(), user.getLongitude())
+                                                              .stream()
+                                                              .map(HourForecast::getInfo)
+                                                              .collect(Collectors.joining("\n" )));
+
+            case "week" -> sendMessage.setText("Weather for the week in " + user.getLocation() + "\n\n" +
+                                                weatherService.getWeekForecast(user.getLatitude(), user.getLongitude())
+                                                              .stream()
+                                                              .map(DayForecast::getInfo)
+                                                              .collect(Collectors.joining("\n")));
+
+            case "now"  -> sendMessage.setText("Weather in " + user.getLocation()+ " now:\n" +
+                                                weatherService.getNowForecast(user.getLocation()).getInfo());
+
+            case "reset"->{usersService.deleteLocationFromUser(user.getId());
+                           sendMessage.setText(Replica.LOCATION_DROPPED +"\n" + Replica.ADVICE);}
+
+            default ->     sendMessage.setText(Replica.USE_KEYBOARD);
+
         }
         return sendMessage;
     }

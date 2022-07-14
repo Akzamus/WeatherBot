@@ -12,9 +12,8 @@ import ru.akzam.WeatherBot.util.Emoji;
 import ru.akzam.WeatherBot.util.UrlUtil;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 @Getter
@@ -45,17 +44,21 @@ public class WeatherService {
 
     public List<HourForecast> getDayForecast(double latitude, double longitude) throws IOException {
         String output = urlUtil.getUrlContent(urlUtil.getUrlToDayForecast(latitude, longitude));
-        JSONArray hourlyArray = new JSONObject(output).getJSONArray("hourly");
+        JSONObject jsonObject = new JSONObject(output);
+        JSONArray hourlyArray = jsonObject .getJSONArray("hourly");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:00", Locale.ENGLISH);
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone(jsonObject.getString("timezone")));
         List<HourForecast> hourForecasts = new ArrayList<>();
 
         for (int i = 1; i < 25; i++) {
             JSONObject hour = hourlyArray.getJSONObject(i);
             JSONObject weather = hour.getJSONArray("weather").getJSONObject(0);
             hourForecasts.add(new HourForecast(
-               new Date(hour.getLong("dt") * 1000),
+               new Date(hour.getLong("dt")* 1000),
                (int)Math.round(hour.getDouble("temp")),
                Emoji.getEmojiByIcon(weather.getString("icon")),
-               weather.getString("description")
+               weather.getString("description"),
+               simpleDateFormat
             ));
         }
         return hourForecasts;

@@ -10,5 +10,5 @@ public class Replica {
     public final static String GEOCODING_ERROR = "An error occurred when defining the city's coordinates.";
     public final static String UNDEFINED_ERROR = "Sorry there was an error in the program(";
     public final static String USE_KEYBOARD = "Please use the keyboard.";
-    public final static String LOCATION_DROPPED = "Location rest " + Emoji.CHECK_MARK;
+    public final static String LOCATION_DROPPED = "Location reset " + Emoji.CHECK_MARK;
 }

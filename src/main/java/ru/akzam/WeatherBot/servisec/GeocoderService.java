@@ -24,14 +24,4 @@ public class GeocoderService {
         JSONObject coordinates = results.getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
         return new Double[] {coordinates.getDouble("lat"), coordinates.getDouble("lng")};
     }
-
-    public boolean isExist(String location) {
-        try {
-            urlUtil.getUrlContent(urlUtil.getUrlToNowForecast(location));
-            getCoordinates(location);
-            return true;
-        }catch (IOException e){
-            return false;
-        }
-    }
 }
