@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot.Controller;
+package ru.akzam.WeatherBot.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
