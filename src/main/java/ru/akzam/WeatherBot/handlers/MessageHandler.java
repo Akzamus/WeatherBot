@@ -55,13 +55,13 @@ public class MessageHandler {
         }
 
         if(messageText.contains("/start")){
-            sendMessage.setText(Replica.GREETING);
+            sendMessage.setText(Replica.GREETING.toString());
             menuService.addMainMenu(sendMessage);
             return sendMessage;
         }
 
         try {return getResponseToRequestFromKeyboard(messageText, sendMessage, user);
-        }catch (IOException e) {sendMessage.setText(Replica.UNDEFINED_ERROR); return sendMessage;}
+        }catch (IOException e) {sendMessage.setText(Replica.UNDEFINED_ERROR.toString()); return sendMessage;}
     }
 
     private void addLocation(String messageText, SendMessage sendMessage, long userId) {
@@ -72,9 +72,9 @@ public class MessageHandler {
                 weatherService.getNowForecast(messageText);
                 Double[] coordinates = geocoderService.getCoordinates(messageText);
                 usersService.addLocationFromUser(messageText, userId, coordinates[0], coordinates[1]);
-                sendMessage.setText(Replica.CORRECT_LOCATION);
+                sendMessage.setText(Replica.CORRECT_LOCATION.toString());
                 menuService.addMainMenu(sendMessage);
-            }catch (IOException e) {sendMessage.setText(Replica.INCORRECT_LOCATION);}
+            }catch (IOException e) {sendMessage.setText(Replica.INCORRECT_LOCATION.toString());}
         }
     }
 
@@ -98,7 +98,7 @@ public class MessageHandler {
             case "reset"->{usersService.deleteLocationFromUser(user.getId());
                            sendMessage.setText(Replica.LOCATION_DROPPED +"\n" + Replica.ADVICE);}
 
-            default ->     sendMessage.setText(Replica.USE_KEYBOARD);
+            default ->     sendMessage.setText(Replica.USE_KEYBOARD.toString());
 
         }
         return sendMessage;

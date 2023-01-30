@@ -42,9 +42,9 @@ public class User {
             this.location = location.toUpperCase();
         } else {
             String[] words = location.split(" ");
-            String correctLocationFormat = "";
+            StringBuilder correctLocationFormat = new StringBuilder();
             for (String word : words)
-                correctLocationFormat += word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase() + " ";
+                correctLocationFormat.append(word.substring(0, 1).toUpperCase()).append(word.substring(1).toLowerCase()).append(" ");
             this.location = correctLocationFormat.substring(0,correctLocationFormat.length()-1);
         }
     }

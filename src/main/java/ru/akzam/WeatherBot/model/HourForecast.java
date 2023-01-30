@@ -4,10 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -15,21 +11,11 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 public class HourForecast {
-    @NotNull
+
     private Date date;
-
-    @NotNull
-    @Max(100)
-    @Min(-100)
     private int temperature;
-
-    @NotEmpty
     private String weatherEmoji;
-
-    @NotEmpty
     private String description;
-
-    @NotNull
     private SimpleDateFormat simpleDateFormat;
 
     public String getInfo() {

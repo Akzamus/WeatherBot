@@ -30,7 +30,8 @@ public class UsersService {
 
     @Transactional
     public void addLocationFromUser(String location, long id, double latitude, double longitude) {
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findById(id)
+                                  .orElseThrow(() -> new NullPointerException("User not found!"));
         user.setLocation(location);
         user.setLatitude(latitude);
         user.setLongitude(longitude);
@@ -38,6 +39,8 @@ public class UsersService {
 
     @Transactional
     public void deleteLocationFromUser(long userId) {
-        findById(userId).get().setLocation(null);
+        userRepository.findById(userId)
+                      .orElseThrow(() -> new NullPointerException("User not found!"))
+                      .setLocation(null);
     }
 }
