@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import ru.akzam.WeatherBot.handlers.MessageHandler;
+import ru.akzam.WeatherBot.handler.MessageHandler;
 
 
 @Component

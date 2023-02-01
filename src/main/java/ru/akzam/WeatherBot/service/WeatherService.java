@@ -1,13 +1,13 @@
-package ru.akzam.WeatherBot.servisec;
+package ru.akzam.WeatherBot.service;
 
 import lombok.Getter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.akzam.WeatherBot.model.DayForecast;
-import ru.akzam.WeatherBot.model.HourForecast;
-import ru.akzam.WeatherBot.model.NowForecast;
+import ru.akzam.WeatherBot.DTO.DayForecast;
+import ru.akzam.WeatherBot.DTO.HourForecast;
+import ru.akzam.WeatherBot.DTO.NowForecast;
 import ru.akzam.WeatherBot.util.Emoji;
 import ru.akzam.WeatherBot.util.UrlUtil;
 

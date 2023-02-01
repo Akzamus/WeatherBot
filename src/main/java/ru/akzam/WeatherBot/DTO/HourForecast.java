@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot.model;
+package ru.akzam.WeatherBot.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

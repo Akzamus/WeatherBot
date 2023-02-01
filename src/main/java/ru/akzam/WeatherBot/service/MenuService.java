@@ -1,10 +1,11 @@
-package ru.akzam.WeatherBot.servisec;
+package ru.akzam.WeatherBot.service;
 
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import ru.akzam.WeatherBot.util.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +31,11 @@ public class MenuService {
         KeyboardRow rowOne = new KeyboardRow();
         KeyboardRow rowTwo = new KeyboardRow();
 
-        rowOne.add(new KeyboardButton("day"));
-        rowOne.add(new KeyboardButton("week"));
+        rowOne.add(new KeyboardButton(Button.DAY.toString()));
+        rowOne.add(new KeyboardButton(Button.WEEK.toString()));
 
-        rowTwo.add((new KeyboardButton("now")));
-        rowTwo.add(new KeyboardButton("reset"));
+        rowTwo.add((new KeyboardButton(Button.NOW.toString())));
+        rowTwo.add(new KeyboardButton(Button.RESET.toString()));
 
         keyboard.add(rowOne);
         keyboard.add(rowTwo);

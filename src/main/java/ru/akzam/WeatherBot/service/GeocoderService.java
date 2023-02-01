@@ -1,4 +1,4 @@
-package ru.akzam.WeatherBot.servisec;
+package ru.akzam.WeatherBot.service;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
